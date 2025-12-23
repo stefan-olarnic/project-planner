@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Project Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+    <div class="min-h-screen flex items-center justify-center bg-gray-50">
+        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-2xl font-semibold mb-6 text-center">Login</h1>
+            <form id="loginForm" class="space-y-4">
+                <input data-unid="login__username__input" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300" type="text" id="username" placeholder="Username or email" required>
+                <input data-unid="login__password__input" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300" type="password" id="password" placeholder="Password" required>
+                <button data-unid="login__submit__button" id="login-submit" class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" type="submit">Login</button>
+            </form>
+            <p data-unid="login__error_msg__text" id="error-msg" class="text-sm text-red-600 mt-3"></p>
+
+            <div class="text-sm mt-4 text-center">Don't have an account? <button data-unid="login__show_register__button" id="show-register" class="text-blue-600 underline">Register</button></div>
+
+            <!-- Register form (hidden by default) -->
+            <div data-unid="login__register_form__container" id="register-form" class="hidden mt-4">
+                <h2 class="text-lg font-semibold mb-3">Register</h2>
+                <div class="space-y-3">
+                    <input data-unid="login__reg_email__input" id="reg-email" class="w-full px-4 py-2 border rounded-md" type="email" placeholder="Email" required>
+                    <input data-unid="login__reg_username__input" id="reg-username" class="w-full px-4 py-2 border rounded-md" type="text" placeholder="Username" required>
+                    <input data-unid="login__reg_password__input" id="reg-password" class="w-full px-4 py-2 border rounded-md" type="password" placeholder="Password" required>
+                    <input data-unid="login__reg_password_confirm__input" id="reg-password-confirm" class="w-full px-4 py-2 border rounded-md" type="password" placeholder="Confirm password" required>
+                    <div data-unid="login__reg_error__text" id="reg-error" class="text-sm text-red-600"></div>
+                    <div class="flex gap-2">
+                        <button data-unid="login__register_btn__button" id="register-btn" class="btn">Register</button>
+                        <button data-unid="login__register_cancel__button" id="register-cancel" class="btn secondary" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+/* ui.css - theme variables and global typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-major: #5D45F6; /* Majorelle Blue */
+  --color-lavender: #C9C1FC;
+  --color-floral: #D6D6D6;
+  --color-black: #101010;
+  --color-white: #ffffff;
+  --text-muted: #6b7280;
+  --bg: #f8fafc;
+  --radius: 10px;
+  --transition: 180ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Base typography */
+body {
+  font-family: 'Poppins', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: var(--bg);
+  color: var(--color-black);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+h1{ font-size:2rem; font-weight:700; }
+h2{ font-size:1.5rem; font-weight:600; }
+h3{ font-size:1.125rem; font-weight:600; }
+p, li, label { color: #111827; }
+
+/* Navbar */
+.navbar { background: var(--color-major); padding: 14px 22px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,0.06); position:relative; z-index:2000; }
+.navbar .btn { background: var(--color-major); box-shadow:none; }
+.navbar .btn:hover { filter:brightness(.95); transform:none; box-shadow:none; }
+.nav-right { position:relative; z-index:2050; }
+.account-menu { position:relative; z-index:2060; }
+.account-menu button { position:relative; z-index:2061; pointer-events:auto; }
+.navbar ul { display:flex; gap:18px; align-items:center; margin:0; padding:0; list-style:none; }
+.navbar a { color: var(--color-white); text-decoration:none; padding:6px 8px; border-radius:6px; }
+.navbar a:hover{ background: rgba(201,193,252,0.12); color: var(--color-white); }
+.nav-right { display:flex; align-items:center; gap:8px; }
+.account-menu { position:relative; }
+.account-dropdown { position:absolute; right:0; top:38px; z-index:9999; background:white; border-radius:10px; box-shadow:0 10px 30px rgba(2,6,23,0.2); padding:8px 0; min-width:180px; display:none; }
+.account-menu button:hover{ box-shadow:0 8px 28px rgba(2,6,23,0.12); transform:translateY(-1px); }
+/* fallback class to force display when attribute-based rule fails in certain browsers/environments */
+.account-dropdown.force-show{ display:block !important }
+.account-dropdown[aria-hidden="false"] { display:block; }
+.account-dropdown .dropdown-link{ 
+    display:block; 
+    padding:10px 14px; 
+    background:none; 
+    border:none; 
+    text-align:left; 
+    width:100%; 
+    color:#111; 
+    text-decoration:none; 
+    cursor:pointer; 
+    position:relative; 
+    z-index:10000; 
+    transition: background-color 0.15s ease, color 0.15s ease; 
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* Ensure both anchor tags and buttons have the same hover effect */
+.account-dropdown .dropdown-link:hover,
+.account-dropdown a.dropdown-link:hover,
+.account-dropdown button.dropdown-link:hover{ 
+    background: rgba(201,193,252,0.12) !important; 
+    color: #111 !important; 
+    text-decoration: none;
+}
+.account-icon { margin-left:8px; display:inline-block; background:rgba(255,255,255,0.12); padding:4px 6px; border-radius:999px }
+
+/* Accent: highlight active nav */
+.navbar a.active{ background: rgba(255,255,255,0.12); font-weight:600 }
+
+
+/* Buttons (fallback for non-Tailwind and consistent look) */
+.btn { display:inline-block; padding:10px 14px; border-radius:10px; background:linear-gradient(90deg,var(--color-major), var(--color-lavender)); color:var(--color-white); border:none; cursor:pointer; font-weight:600; transition:transform var(--transition), box-shadow var(--transition), background-color var(--transition); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+.btn:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(15,23,42,0.12); background: linear-gradient(90deg, #4b3be8, var(--color-major)); }
+.btn:active{ transform:translateY(0); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+.btn:focus{ outline:3px solid rgba(93,69,246,0.18); outline-offset:3px; }
+.btn.secondary { background: var(--color-floral); color: var(--color-black); box-shadow:none; }
+.btn.secondary:hover{ background: #e9e7ef }
+.btn.small { padding:6px 8px; font-size:12px; }
+.btn[aria-disabled='true']{ opacity:0.8; cursor:default; }
+
+/* project link */
+.project-link{ color:var(--color-major); text-decoration:none; font-weight:600 }
+.project-link:hover{ text-decoration:underline }
+
+/* danger */
+.btn-danger{ background:#ff4d4f; color:#fff; box-shadow:none }
+.btn-danger:hover{ filter:brightness(.95) }
+/* Ensure btn-danger with small class has same dimensions */
+.btn-danger.small { 
+    padding: 6px 8px !important; 
+    font-size: 12px !important; 
+    font-weight: 600;
+}
+
+
+
+/* dropdown link hover - removed duplicate, using unified rule above */
+
+/* projects meta style */
+#projects-meta{ font-weight:700; color:#0f172a; margin-left:12px; text-align:center }
+#projects-meta.warning{ color:#b45309 }
+
+/* header layout */
+.projects-header{ display:flex; align-items:center; gap:12px; margin:20px 0 }
+.projects-header h1{ margin:0; font-size:1.75rem }
+.projects-header .center-meta{ flex:1; display:flex; justify-content:center }
+.projects-header .actions{ margin-left:auto }
+
+/* table compact */
+.projects-table td, .projects-table th, .projects-table td a { padding:8px 10px }
+
+/* tasks list compact */
+#tasks-list li{ margin-bottom:6px; padding:8px; background:#fff; border-radius:6px; list-style:none }
+#today-panel { background: linear-gradient(180deg,#fff,#fbfbfd); }
+#today-tasks-list li{ margin-bottom:8px; padding:8px; border-radius:6px; list-style:none; background: #fff }
+.task-done-checkbox{ margin-right:8px }
+.progress { align-items:center }
+
+
+/* status badge spacing */
+.status-badge{ letter-spacing:0.2px }
+
+/* progress bar */
+.progress{ position:relative; height:18px; background:linear-gradient(90deg,#f5f3ff,#fbfbfd); border-radius:999px; overflow:hidden; display:flex; align-items:center; gap:8px; padding:2px 8px; }
+.progress-inner{ height:10px; background: linear-gradient(90deg,var(--color-major), var(--color-lavender)); border-radius:999px; transition: width var(--transition); flex:1 }
+.progress-text{ font-size:12px; color:var(--text-muted); margin-left:8px; min-width:36px; text-align:right }
+
+
+/* Edit modal tweaks */
+#edit-project-modal .modal-panel input, #edit-project-modal .modal-panel select { width:100%; box-sizing:border-box }
+#edit-project-modal .modal-actions{ display:flex; justify-content:flex-end; gap:8px }
+
+
+
+/* Cards */
+.plan-card { min-height: 100px; border: 1px solid var(--color-floral); background: linear-gradient(180deg,#ffffff, #fbfbfd); padding:18px; }
+.plan-card h3 { margin-top:0; color: var(--color-black); }
+.plan-card .plan-badge-placeholder { min-width:90px; text-align:right }
+
+/* improved feature bullets */
+.plan-features { padding-left: 0; }
+.plan-features li { list-style: none; position: relative; padding-left: 28px; color: #111827 }
+.plan-features li::before { content: "\2713"; position: absolute; left: 0; top: 0; color: var(--color-white); font-weight:700; background: linear-gradient(90deg,var(--color-major),var(--color-lavender)); height:20px; width:20px; display:flex; align-items:center; justify-content:center; border-radius:6px; font-size:12px; box-shadow:0 6px 18px rgba(93,69,246,0.06) }
+
+/* Current plan badge */
+.current-plan-badge { display:inline-block; padding:6px 10px; font-size:12px; border-radius:999px; font-weight:700; background: linear-gradient(90deg, var(--color-lavender), var(--color-major)); color: var(--color-white); }
+.current-plan-card { box-shadow:0 10px 30px rgba(93,69,246,0.08); border-color: rgba(93,69,246,0.08); }
+
+/* hover for project rows */
+.projects-table tr[data-idx]:hover{ background-color: rgba(201,193,252,0.12); cursor:pointer }
+
+/* account dropdown hover - unified rule with better visibility */
+.account-dropdown .dropdown-link:hover{ 
+    background: rgba(201,193,252,0.12); 
+    color: #111; 
+}
+
+
+/* Projects table */
+.projects-table th, .projects-table td { padding:12px 16px; border-bottom:1px solid #e6e6e6; }
+.projects-table { background:transparent; }
+
+/* Login small tweaks */
+.login-card { max-width:420px; }
+
+/* Modal tweaks already in dashboard.css are OK */
+
+/* Modal - ensure modals behave correctly across all pages */
+.modal{display:none;position:fixed;inset:0;align-items:center;justify-content:center;z-index:1200}
+.modal[aria-hidden="false"]{display:flex}
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45)}
+.modal-panel{position:relative;background:#fff;padding:20px;border-radius:10px;max-width:520px;width:90%;box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:1}
+.modal-panel h3{margin-top:0}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.modal .btn.secondary{background:#6c757d}
+.modal .btn[aria-disabled="true"]{opacity:0.8;cursor:default} 
+
+/* Utility: center content within pages */
+.container-centered { margin-left:auto; margin-right:auto; max-width:1100px; padding-left:24px; padding-right:24px; }
+
+/* compact look for small screens */
+@media (max-width:700px){ .navbar ul { gap:10px } }
+
+/* row hover and pointer for clickable rows */
+.projects-table tr[data-idx]{ transition: background-color .12s ease-in-out }
+.projects-table tr[data-idx]:hover{ background-color:#f1f5f9; cursor:pointer }
+
+/* ensure header centered and action aligned */
+.projects-header{ position:relative }
+.projects-header .actions{ position:absolute; right:0; top:0 }
+

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+
+    <div id="navbar-container">
+        <nav class="navbar">
+            <ul>
+                <li><a data-unid="project__nav_dashboard_link" id="nav-dashboard-link" href="dashboard.html">Dashboard</a></li>
+                <li><a data-unid="project__nav_projects_link" id="nav-projects-link" href="projects.html">Projects</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="account-menu" id="account-menu">
+                    <button id="account-btn" type="button" class="btn small" aria-haspopup="true" aria-expanded="false">Account <span class="account-icon">👤</span></button>
+                    <div class="account-dropdown" id="account-dropdown" aria-hidden="true">
+                        <a data-unid="project__nav_settings_link" id="nav-settings-link" href="settings.html" class="dropdown-link">Settings</a>
+                        <button data-unid="project__logout_btn" id="logout-btn" class="dropdown-link">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="mx-auto max-w-6xl px-6 py-10">
+            <div class="flex items-center justify-between">
+            <h1 data-unid="project__title" id="project-title" class="text-2xl font-bold">Project</h1>
+            <div>
+                <button data-unid="project__edit_project_btn" id="edit-project-btn" class="btn small">Edit project</button>
+                <button data-unid="project__delete_project_btn" id="delete-project-btn" class="btn small btn-danger ml-2">Delete project</button>
+            </div> 
+        </div>
+        <p data-unid="project__description" id="project-desc" class="mt-2 mb-2"></p>
+        <p><strong>Status:</strong> <span id="project-status"></span></p>
+
+        <div id="project-progress" class="mb-4">
+            <div class="progress" role="progressbar" aria-valuenow="0" aria-label="Project progress">
+                <div class="progress-inner" style="width:0%"></div>
+                <span class="progress-text">0%</span>
+            </div>
+        </div>
+
+        <div id="today-panel" class="bg-white p-4 rounded-md shadow-sm mb-6">
+            <h3 class="text-lg font-semibold mb-2">Today — To do</h3>
+            <ul data-unid="project__today_tasks_list" id="today-tasks-list"></ul>
+        </div>
+
+        <div id="tasks-section" class="mt-6">
+            <h2 class="text-lg font-semibold mb-2">Tasks - <span data-unid="project__tasks_count" id="tasks-count">0</span></h2>
+            <div id="tasks-controls" class="mb-3">
+                <button data-unid="project__add_task_btn" id="add-task-btn" class="btn">Add task</button>
+            </div>
+            <ul data-unid="project__tasks_list" id="tasks-list"></ul>
+        </div>
+    </main>
+
+    <!-- Add Task Modal -->
+    <div id="add-task-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="add-task-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="add-task-title">Add task</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Title</label>
+                <input data-unid="project__add_task_title_input" id="add-task-title-input" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Notes</label>
+                <input data-unid="project__add_task_note_input" id="add-task-note-input" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Due date</label>
+                <input data-unid="project__add_task_due_input" id="add-task-due-input" type="date" class="w-full px-3 py-2 border rounded-md" />
+                <div data-unid="project__add_task_error" id="add-task-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button data-unid="project__add_task_cancel" id="add-task-cancel" class="btn secondary">Cancel</button>
+                    <button data-unid="project__add_task_save" id="add-task-save" class="btn">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="edit-project-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="edit-project-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="edit-project-title">Edit project</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Name</label>
+                <input id="project-edit-name" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Description</label>
+                <input id="project-edit-desc" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Status</label>
+                <select id="project-edit-status" class="w-full px-3 py-2 border rounded-md">
+                    <option value="Planned">Planned</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <div id="project-edit-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button id="project-edit-cancel" class="btn secondary">Cancel</button>
+                    <button id="project-edit-save" class="btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Project Modal -->
+    <div id="delete-project-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="delete-project-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="delete-project-title">Delete project</h3>
+            <p id="delete-project-msg">Delete this project? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="delete-project-cancel" class="btn secondary">Cancel</button>
+                <button id="delete-project-confirm" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Set Date Modal -->
+    <div id="set-date-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="set-date-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="set-date-title">Set due date</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Due date</label>
+                <input id="set-date-input" type="date" class="w-full px-3 py-2 border rounded-md" />
+                <div id="set-date-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button id="set-date-cancel" class="btn secondary">Cancel</button>
+                    <button id="set-date-save" class="btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/upgrade.js"></script>
+    <script src="assets/js/project.js"></script>
+</body>
+</html>

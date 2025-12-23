@@ -1,0 +1,170 @@
+nav {
+    background: var(--color-major);
+    color: var(--color-white);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.project-card {
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Dashboard plan cards */
+.plan-cards { display:flex; gap:20px; margin:20px 0; }
+.plan-card { flex:1; background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+.plan-card h3 { margin-top:0; }
+.plan-card .btn { margin-top:10px; }
+.plan-card.plan-pro { border:1px solid #e6e9ef; }
+
+/* Projects summary table */
+.projects-summary { margin-top:20px; }
+.projects-header { display:flex; justify-content:space-between; align-items:center; }
+.projects-actions { display:flex; gap:10px; }
+.projects-table { width:100%; border-collapse:collapse; margin-top:12px; }
+.projects-table th, .projects-table td { padding:12px 10px; border-bottom:1px solid #eee; text-align:left; }
+
+/* Buttons */
+.btn { display:inline-block; padding:8px 12px; border-radius:8px; background: linear-gradient(90deg,var(--color-major), var(--color-lavender)); color:var(--color-white); border:none; cursor:pointer; transition: transform var(--transition), box-shadow var(--transition); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+.btn:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(15,23,42,0.12); }
+.btn.secondary { background: var(--color-floral); color: var(--color-black); box-shadow:none }
+.btn.small { padding:6px 8px; font-size:12px; }
+/* Ensure all small buttons (including danger) have same size */
+.btn.small,
+.btn-danger.small,
+.btn.small.btn-danger {
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+    font-weight: 600;
+}
+
+/* Align team action buttons to same width and vertical center */
+.team-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.team-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    padding: 0 !important;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin: 0;
+    align-self: center;
+}
+.team-actions .btn-danger {
+    padding: 0 !important;
+}
+
+/* Responsive */
+@media(max-width:700px){ .plan-cards{flex-direction:column;} }
+
+/* Modal */
+.modal{display:none;position:fixed;inset:0;align-items:center;justify-content:center;z-index:1200}
+.modal[aria-hidden="false"]{display:flex}
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45)}
+.modal-panel{position:relative;background:#fff;padding:20px;border-radius:10px;max-width:520px;width:90%;box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:1}
+.modal-panel h3{margin-top:0}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.modal .btn.secondary{background:#6c757d}
+.modal .btn[aria-disabled="true"]{opacity:0.8;cursor:default}
+
+/* appearance for create button when at limit (still clickable to show modal) */
+.btn.at-limit{opacity:0.75; box-shadow:none;}
+.btn.at-limit:hover{opacity:0.85}
+
+/* status badges */
+.status-badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px}
+.status-badge.planned{background:#fff7ed;color:#b45309;border:1px solid #fcd34d}
+.status-badge.active{background:#ecfdf5;color:#065f46;border:1px solid #86efac}
+.status-badge.paused{background:#f8fafc;color:#374151;border:1px solid #e5e7eb}
+.status-badge.archived{background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db}
+.status-badge.completed{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
+
+/* Team Card Styles */
+.team-card {
+    background: linear-gradient(180deg, #ffffff, #fbfbfd);
+    border: 1px solid var(--color-floral);
+    min-height: 300px;
+}
+
+.team-members-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.team-member-item {
+    transition: background-color 0.15s ease;
+}
+
+.team-member-avatar {
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(93, 69, 246, 0.15);
+}
+
+.team-manage-card {
+    border: 1px solid #e5e7eb;
+}
+
+.team-members-mini {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Dashboard grid layout */
+.dashboard-grid {
+    gap: 24px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Invite button styling */
+.invite-to-team-btn {
+    margin-top: 8px;
+}
+
+/* Invitation notification badge */
+.invitation-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.invitation-card {
+    transition: background-color 0.15s ease;
+}
+
+.invitation-card:hover {
+    background-color: #f9fafb;
+}

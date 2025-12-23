@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div id="navbar-container">
+        <!-- simplified navbar (kept inline for now) -->
+        <nav class="navbar">
+            <ul>
+                <li><a data-unid="dashboard__nav_dashboard_link" id="nav-dashboard-link" href="dashboard.html">Dashboard</a></li>
+                <li><a data-unid="dashboard__nav_projects_link" id="nav-projects-link" href="projects.html">Projects</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="account-menu" id="account-menu">
+                    <button data-unid="dashboard__account_btn" id="account-btn" type="button" class="btn small" aria-haspopup="true" aria-expanded="false">Account <span class="account-icon">👤</span></button>
+                    <div class="account-dropdown" id="account-dropdown" aria-hidden="true">
+                        <a data-unid="dashboard__nav_settings_link" id="nav-settings-link" href="settings.html" class="dropdown-link">Settings</a>
+                        <button data-unid="dashboard__logout_btn" id="logout-btn" class="dropdown-link">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="mx-auto max-w-6xl px-6 py-10">
+        <h1 id="welcome-msg" class="text-3xl font-bold mb-6"></h1>
+
+        <!-- Plan cards -->
+        <div class="plan-cards grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div id="free-plan-card" class="plan-card p-6 rounded-lg bg-white shadow-md relative">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold">Free</h3>
+                        <p class="text-sm text-gray-500 mt-1">Perfect for getting started</p>
+                    </div>
+                    <div class="plan-badge-placeholder"></div>
+                </div>
+                <ul class="plan-features mt-4 text-sm space-y-2">
+                    <li>Max <strong>2</strong> projects</li>
+                    <li>Max <strong>5</strong> tasks / project</li>
+                    <li>No archive</li>
+                </ul>
+            </div>
+                <div data-unid="dashboard__pro_plan_card" id="pro-plan-card" class="plan-card plan-pro p-6 rounded-lg bg-white shadow-md relative">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold">Pro</h3>
+                        <p class="text-sm text-gray-500 mt-1">More features for teams</p>
+                    </div>
+                    <div class="plan-badge-placeholder"></div>
+                </div>
+                <ul class="plan-features mt-4 text-sm space-y-2">
+                    <li>Max <strong>10</strong> projects</li>
+                    <li>Max <strong>50</strong> tasks / project</li>
+                    <li>Archivable projects</li>
+                </ul>
+                <button data-unid="dashboard__pro_upgrade_btn" id="upgrade-btn" class="btn mt-4">Upgrade</button>
+            </div>
+        </div>
+
+        <!-- Main content grid: Projects and Teams -->
+        <div class="dashboard-grid grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Projects summary (preview) - takes 2 columns -->
+            <div class="projects-summary lg:col-span-2">
+                <div class="projects-header flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-semibold">Your projects</h2>
+                    <div class="projects-actions flex gap-2">
+                        <button data-unid="dashboard__new_project_btn" id="new-project-btn" class="btn">Create project</button>
+                        <a data-unid="dashboard__view_all_link" href="projects.html" class="btn secondary" id="view-all-link">View all</a>
+                    </div>
+                </div>
+                <table class="projects-table w-full bg-white rounded-md overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th class="text-left px-4 py-2">Name</th>
+                            <th class="text-left px-4 py-2">Status</th>
+                            <th class="text-left px-4 py-2">Deadline</th>
+                            <th class="text-left px-4 py-2">Progres</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboard-table-body" class="text-sm">
+                        <!-- Populat din JS (preview max 2) -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Team Members Card - takes 1 column -->
+            <div class="team-card-section">
+                <div class="team-card bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">Team Members</h2>
+                        <button data-unid="dashboard__manage_teams_btn" id="manage-teams-btn" class="btn small" title="Manage teams">⚙️</button>
+                    </div>
+                    <div data-unid="dashboard__team_members_list" id="team-members-list" class="team-members-list">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div data-unid="dashboard__no_teams_message" id="no-teams-message" class="text-sm text-gray-500 text-center py-4" style="display: none;">
+                        No teams yet. Create a team to collaborate!
+                    </div>
+                    <button data-unid="dashboard__create_team_btn" id="create-team-btn" class="btn w-full mt-4">Create Team</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Team Modal -->
+    <div id="create-team-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="create-team-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="create-team-title">Create Team</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Team Name</label>
+                <input id="create-team-name-input" class="w-full px-3 py-2 border rounded-md" placeholder="Enter team name" />
+                <label class="text-sm">Description (optional)</label>
+                <input id="create-team-desc-input" class="w-full px-3 py-2 border rounded-md" placeholder="Team description" />
+                <div id="create-team-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button id="create-team-cancel" class="btn secondary">Cancel</button>
+                    <button id="create-team-save" class="btn">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Teams Modal -->
+    <div id="manage-teams-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="manage-teams-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel" style="max-width: 700px;">
+            <h3 id="manage-teams-title">Manage Teams</h3>
+            <div id="teams-list-container" class="space-y-4 mb-4">
+                <!-- Teams list populated by JS -->
+            </div>
+            <div class="modal-actions">
+                <button id="manage-teams-close" class="btn secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite Member Modal -->
+    <div id="invite-member-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="invite-member-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="invite-member-title">Invite Team Member</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Username/Email</label>
+                <input id="invite-member-username-input" class="w-full px-3 py-2 border rounded-md" placeholder="Enter username or email" />
+                <label class="text-sm">Role</label>
+                <select id="invite-member-role-select" class="w-full px-3 py-2 border rounded-md">
+                    <option value="member">Member</option>
+                    <option value="admin">Admin</option>
+                    <option value="viewer">Viewer</option>
+                </select>
+                <div id="invite-member-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button id="invite-member-cancel" class="btn secondary">Cancel</button>
+                    <button id="invite-member-save" class="btn">Send Invitation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Invitations Modal -->
+    <div id="team-invitations-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="team-invitations-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel" style="max-width: 600px;">
+            <h3 id="team-invitations-title">Team Invitations</h3>
+            <div id="invitations-list-container" class="space-y-3 mb-4">
+                <!-- Invitations populated by JS -->
+            </div>
+            <div class="modal-actions">
+                <button id="team-invitations-close" class="btn secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invitation Notification Badge (floating) -->
+    <div id="invitation-notification-badge" class="invitation-badge" style="display: none;">
+        <button id="show-invitations-btn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; border-radius: 50px; padding: 12px 20px; box-shadow: 0 4px 12px rgba(93, 69, 246, 0.3);">
+            <span id="invitation-count">0</span> New Invitation(s)
+        </button>
+    </div>
+
+    <!-- Message Dialog Modal -->
+    <div id="message-dialog-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="message-dialog-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel" style="max-width: 400px;">
+            <h3 id="message-dialog-title" class="mb-3"></h3>
+            <p id="message-dialog-text" class="mb-4"></p>
+            <div class="modal-actions">
+                <button id="message-dialog-ok" class="btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leave Team Confirmation Modal -->
+    <div id="leave-team-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="leave-team-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="leave-team-title">Leave Team</h3>
+            <p id="leave-team-message" class="mb-4"></p>
+            <div class="modal-actions">
+                <button id="leave-team-cancel" class="btn secondary">Cancel</button>
+                <button id="leave-team-confirm" class="btn btn-danger">Leave Team</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Team Confirmation Modal -->
+    <div id="delete-team-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="delete-team-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="delete-team-title">Delete Team</h3>
+            <p id="delete-team-message" class="mb-4"></p>
+            <p class="text-sm text-red-600 mb-4">⚠️ This action cannot be undone. All team data and invitations will be permanently deleted.</p>
+            <div class="modal-actions">
+                <button id="delete-team-cancel" class="btn secondary">Cancel</button>
+                <button id="delete-team-confirm" class="btn btn-danger">Delete Team</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/teams.js"></script>
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/upgrade.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/settings.css">
+</head>
+<body>
+
+    <div id="navbar-container">
+        <nav class="navbar">
+            <ul>
+                <li><a data-unid="settings__nav_dashboard_link" id="nav-dashboard-link" href="dashboard.html">Dashboard</a></li>
+                <li><a data-unid="settings__nav_projects_link" id="nav-projects-link" href="projects.html">Projects</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="account-menu" id="account-menu">
+                    <button data-unid="settings__account_btn" id="account-btn" type="button" class="btn small">Account <span class="account-icon">👤</span></button>
+                    <div class="account-dropdown" id="account-dropdown" aria-hidden="true">
+                        <a data-unid="settings__nav_settings_link" id="nav-settings-link" href="settings.html" class="dropdown-link">Settings</a>
+                        <button data-unid="settings__logout_btn" id="logout-btn" class="dropdown-link">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="mx-auto max-w-4xl px-6 py-10">
+        <div class="settings-header mb-8">
+            <h1 class="text-3xl font-bold mb-2">Account Settings</h1>
+            <p class="text-gray-600">Manage your account information and subscription</p>
+        </div>
+
+        <!-- Plan Management Card -->
+        <div class="settings-card mb-6">
+            <div class="settings-card-header">
+                <h2 class="text-xl font-semibold">Subscription Plan</h2>
+            </div>
+            <div class="settings-card-body">
+                <div class="plan-info-section">
+                    <div class="plan-badge-container">
+                        <span data-unid="settings__plan_badge" id="plan-badge" class="plan-badge-large"></span>
+                    </div>
+                    <div class="plan-actions">
+                        <button data-unid="settings__upgrade_btn" id="upgrade-btn" class="btn btn-upgrade">Upgrade to Pro</button>
+                        <button data-unid="settings__downgrade_btn" id="downgrade-btn" class="btn btn-danger" style="display: none;">Downgrade to Free</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Information Card -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <h2 class="text-xl font-semibold">Account Information</h2>
+            </div>
+            <div class="settings-card-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">👤</span>
+                            Username
+                        </div>
+                        <div data-unid="settings__acct_username" class="info-value" id="acct-username">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">✉️</span>
+                            Email
+                        </div>
+                        <div data-unid="settings__acct_email" class="info-value" id="acct-email">—</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">📦</span>
+                            Current Plan
+                        </div>
+                        <div data-unid="settings__acct_plan" class="info-value" id="acct-plan">—</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/upgrade.js"></script>
+    <script src="assets/js/settings.js"></script>
+</body>
+</html>

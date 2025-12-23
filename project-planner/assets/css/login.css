@@ -1,0 +1,25 @@
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.login-container input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(90deg,var(--color-major), var(--color-lavender));
+    color: var(--color-white);
+    border: none;
+    border-radius: 6px;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+.login-container button:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(15,23,42,0.08);}

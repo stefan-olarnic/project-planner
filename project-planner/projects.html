@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div id="navbar-container">
+        <nav class="navbar">
+            <ul>
+                <li><a data-unid="projects__nav_dashboard_link" id="nav-dashboard-link" href="dashboard.html">Dashboard</a></li>
+                <li><a data-unid="projects__nav_projects_link" id="nav-projects-link" href="projects.html">Projects</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="account-menu" id="account-menu">
+                    <button id="account-btn" type="button" class="btn small" aria-haspopup="true" aria-expanded="false">Account <span class="account-icon">👤</span></button>
+                    <div class="account-dropdown" id="account-dropdown" aria-hidden="true">
+                        <a data-unid="projects__nav_settings_link" id="nav-settings-link" href="settings.html" class="dropdown-link">Settings</a>
+                        <button data-unid="projects__logout_btn" id="logout-btn" class="dropdown-link">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Plan limit modal -->
+    <div id="limit-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="limit-modal-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="limit-modal-title">Plan limit reached</h3>
+            <p id="limit-modal-msg">You cannot create more projects. You have reached your plan limit.</p>
+                <div class="modal-actions">
+                <button data-unid="projects__limit_cancel" id="limit-cancel" class="btn secondary">Cancel</button>
+                <button data-unid="projects__limit_upgrade" id="limit-upgrade" class="btn" aria-disabled="true">Upgrade</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="edit-project-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="edit-modal-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="edit-modal-title">Edit project</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Name</label>
+                <input data-unid="projects__edit_name_input" id="edit-name" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Description</label>
+                <input data-unid="projects__edit_desc_input" id="edit-desc" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Status</label>
+                <select data-unid="projects__edit_status_select" id="edit-status" class="w-full px-3 py-2 border rounded-md">
+                    <option value="Planned">Planned</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <div data-unid="projects__edit_error" id="edit-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button data-unid="projects__edit_cancel" id="edit-cancel" class="btn secondary">Cancel</button>
+                    <button data-unid="projects__edit_save" id="edit-save" class="btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Project Modal -->
+    <div id="create-project-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="create-modal-title">
+        <div class="modal-overlay" data-close="true"></div>
+        <div class="modal-panel">
+            <h3 id="create-modal-title">Create project</h3>
+            <div class="space-y-3">
+                <label class="text-sm">Name</label>
+                <input data-unid="projects__create_name_input" id="create-name" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Description</label>
+                <input data-unid="projects__create_desc_input" id="create-desc" class="w-full px-3 py-2 border rounded-md" />
+                <label class="text-sm">Status</label>
+                <select data-unid="projects__create_status_select" id="create-status" class="w-full px-3 py-2 border rounded-md">
+                    <option value="Planned">Planned</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <div data-unid="projects__create_error" id="create-error" class="text-sm text-red-600"></div>
+                <div class="modal-actions">
+                    <button data-unid="projects__create_cancel" id="create-cancel" class="btn secondary">Cancel</button>
+                    <button data-unid="projects__create_save" id="create-save" class="btn">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="mx-auto max-w-6xl px-6 py-10">
+
+    <div class="projects-header relative mb-6 text-center">
+        <div class="mx-auto inline-block">
+            <h1 class="text-2xl font-semibold">Projects</h1>
+            <div id="projects-meta" class="mt-1 text-sm text-gray-500"></div>
+        </div>
+            <div class="actions absolute right-0 top-0">
+            <button data-unid="projects__create_project_btn" id="create-project-btn" class="btn">Create project</button>
+        </div>
+    </div>
+
+    <table class="projects-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Progres</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody data-unid="projects__table_body" id="projects-table-body">
+            <!-- Populat din JS -->
+        </tbody>
+    </table>
+    </main>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/upgrade.js"></script>
+    <script src="assets/js/projects.js"></script>
+</body>
+</html>
