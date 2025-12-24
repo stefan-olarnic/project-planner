@@ -1,15 +1,13 @@
+from pom.login_page.login_page import login_page
+
 class LoginPage:
     def __init__(self, page):
         self.page = page
 
-        self.username = "[data-unid='login__username__input']"
-        self.password = "[data-unid='login__password__input']"
-        self.submit = "[data-unid='login__submit__button']"
-
-    def open(self):
-        self.page.goto("http://localhost:8000/login.html")
+    def open_app(self):
+        self.page.goto("http://localhost:8000/project-planner/login.html")
 
     def login(self, username, password):
-        self.page.fill(self.username, username)
-        self.page.fill(self.password, password)
-        self.page.click(self.submit)
+        self.page.fill(login_page['username_input'], username)
+        self.page.fill(login_page['password_input'], password)  
+        self.page.click(login_page['submit_button'])

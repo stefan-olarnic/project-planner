@@ -60,7 +60,7 @@
         const pw = passwordInput.value || '';
         const users = getUsers();
         const found = users.find(u => u.username === loginValue || u.email === loginValue);
-        if (!found){ errorMsg.textContent = 'Username sau email inexistent.'; return; }
+        if (!found){ errorMsg.textContent = 'Username or email incorrect.'; return; }
         // if user still has legacy plain `password` field, support it and migrate
         if (found.password){
             if (found.password === pw){

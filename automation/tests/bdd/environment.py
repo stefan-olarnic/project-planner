@@ -31,6 +31,13 @@ def before_scenario(context, scenario):
 
 def after_scenario(context, scenario):
     """Cleanup executed after each scenario"""
+    # Take screenshot before closing - use absolute path
+    screenshots_dir = Path(__file__).parent / "screenshots"
+    screenshots_dir.mkdir(parents=True, exist_ok=True)
+    screenshot_path = screenshots_dir / f"{scenario.name.replace(' ', '_')}.png"
+    context.page.screenshot(path=str(screenshot_path))
+    print(f"Screenshot saved: {screenshot_path}")
+    
     if hasattr(context, 'context_browser'):
         context.context_browser.close()
     if hasattr(context, 'browser'):
