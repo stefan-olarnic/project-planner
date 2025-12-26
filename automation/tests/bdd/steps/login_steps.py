@@ -7,10 +7,14 @@ def step_open_login(context):
     context.login_page = LoginPage(context.page)
     context.login_page.open_app()
 
-@when('User login with "{username}" and "{password}"')
+@step('User login with "{username}" and "{password}"')
 def step_login(context, username, password):
+    # Initialize login_page if not already set
+    if not hasattr(context, 'login_page') or context.login_page is None:
+        context.login_page = LoginPage(context.page)
+        context.login_page.open_app()
+    
     login_page: LoginPage = context.login_page
-
     login_page.login(username, password)
     print(context.page.url)
 
