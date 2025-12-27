@@ -1,7 +1,8 @@
 from automation.pom.base_page.BasePage import BasePage
 from automation.pom.projects_page.projects_page import (
     projects_page,
-    create_project_dialog
+    create_project_dialog,
+    limit_reached_dialog
 )
 
 class ProjectsPage(BasePage):
@@ -32,6 +33,22 @@ class ProjectsPage(BasePage):
         
         # Wait for modal to close (state="hidden" or "detached")
         self.page.wait_for_selector("#create-project-modal", state="hidden", timeout=5000)
+    
+    def try_create_project_at_limit(self):
+        """
+        Try to create a project when at limit (button is disabled)
+        Forces click to trigger the limit modal
+        """
+        try:
+            # Force click on disabled button to trigger limit modal
+            self.page.click(
+                projects_page['create_project_button'],
+                force=True,
+                timeout=3000
+            )
+        except Exception as e:
+            # Modal might already be visible or button behavior changed
+            print(f"Note: Could not click button - {e}")
 
     def verify_project_exists(self, project_name, expected_status=None):
         """
@@ -100,3 +117,54 @@ class ProjectsPage(BasePage):
             project_names.append(name.strip())
     
         return project_names
+    
+    def get_project_count(self):
+        """
+        Get the number of projects in the table
+        
+        Returns:
+            int: Number of projects
+        """
+        return len(self.get_all_project_names())
+    
+    def verify_limit_modal_displayed(self):
+        """
+        Verify that the plan limit modal is displayed
+        
+        Returns:
+            bool: True if modal is visible
+        """
+        limit_modal = self.page.locator("#limit-modal[aria-hidden='false']")
+        assert limit_modal.is_visible(), "Plan limit modal is not displayed"
+        return True
+    
+    def get_limit_modal_message(self):
+        """
+        Get the message text from the limit modal
+        
+        Returns:
+            str: Modal message text
+        """
+        message = self.page.locator("#limit-modal-msg").inner_text()
+        return message.strip()
+    
+    def verify_upgrade_button_visible(self):
+        """
+        Verify that the Upgrade button is visible in the limit modal
+        """
+        upgrade_btn = self.page.locator(limit_reached_dialog['upgrade_button'])
+        assert upgrade_btn.is_visible(), "Upgrade button is not visible"
+        return True
+    
+    def is_create_button_enabled(self):
+        """
+        Check if the Create Project button is enabled
+        
+        Returns:
+            bool: True if enabled, False if disabled
+        """
+        create_btn = self.page.locator(projects_page['create_project_button'])
+        # Check if button has disabled attribute or aria-disabled
+        is_disabled = create_btn.get_attribute('disabled') is not None or \
+                     create_btn.get_attribute('aria-disabled') == 'true'
+        return not is_disabled

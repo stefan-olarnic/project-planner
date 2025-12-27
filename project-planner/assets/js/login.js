@@ -19,11 +19,25 @@
     function getUsers(){ return JSON.parse(localStorage.getItem('users') || '[]'); }
     function saveUsers(u){ localStorage.setItem('users', JSON.stringify(u)); }
 
+    // One-time migration: Force complete reset if version flag is missing or old user exists
+    const MIGRATION_VERSION = 'v2_prouser';
+    const currentVersion = localStorage.getItem('migration_version');
+    const currentUsers = getUsers();
+    const hasOldUser = currentUsers.some(u => u.username === 'user');
+    
+    if (currentVersion !== MIGRATION_VERSION || hasOldUser) {
+        console.log('Running one-time migration to prouser...');
+        // Complete localStorage clear
+        localStorage.clear();
+        // Set migration flag
+        localStorage.setItem('migration_version', MIGRATION_VERSION);
+    }
+
     // Initialize default users (hashed)
     if (!localStorage.getItem('users')){
         const defaults = [
             { username: 'admin', email: 'admin@example.com', password: '1234', plan: 'free' },
-            { username: 'user', email: 'user@example.com', password: 'abcd', plan: 'free' }
+            { username: 'prouser', email: 'user@example.com', password: 'abcd', plan: 'pro' }
         ];
         // Hash passwords before storing
         for (const d of defaults){ d.passwordHash = await hashPassword(String(d.password)); delete d.password; }

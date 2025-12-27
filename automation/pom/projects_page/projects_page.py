@@ -11,3 +11,8 @@ create_project_dialog = {
     "submit_button": "[data-unid='projects__create_save']",
     "cancel_button": "[data-unid='projects__create_cancel']"
 }
+
+limit_reached_dialog = {
+    # --- ELEMENTS ON PLAN LIMIT REACHED MODAL ---
+    "upgrade_button": "[data-unid='projects__limit_upgrade']"
+}
