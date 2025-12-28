@@ -61,19 +61,19 @@ class ProjectsPage(BasePage):
         Raises:
             AssertionError: If project is not found or status doesn't match
         """
-        # Folosește get_all_project_names() pentru a verifica existența
+        # Use get_all_project_names() to check existence
         all_projects = self.get_all_project_names()
         
         assert project_name in all_projects, \
             f"Project '{project_name}' not found in projects table. " \
             f"Available projects: {all_projects}"
         
-        # Verifică și vizibilitatea link-ului
+        # Verify visibility of the project link
         project_link = self.page.locator(f"a.project-link:has-text('{project_name}')")
         assert project_link.is_visible(), \
             f"Project '{project_name}' exists but is not visible"
         
-        # Dacă se cere, verifică și statusul
+        # Verify status if provided
         if expected_status:
             actual_status = self.get_project_status(project_name)
             assert actual_status == expected_status, \
@@ -90,13 +90,13 @@ class ProjectsPage(BasePage):
         Returns:
             str: The status of the project (e.g., 'Active', 'Planned', 'Completed')
         """
-        # Găsește rândul care conține link-ul cu numele proiectului
+        # Find the row containing the project name link
         row = self.page.locator(f"tr:has(a.project-link:text-is('{project_name}'))")
         
         if row.count() == 0:
             raise ValueError(f"Project '{project_name}' not found in table")
         
-        # Coloana 3 = Status (conține span cu clasa status-badge)
+        # Column 3 = Status (contains span with class status-badge)
         status = row.locator("td:nth-child(3) .status-badge").inner_text()
         return status.strip()
 
@@ -107,7 +107,7 @@ class ProjectsPage(BasePage):
         Returns:
             list: List of project names
         """
-        # Găsește toate link-urile cu clasa project-link din tbody
+        # Find all links with class project-link in tbody
         project_links = self.page.locator("tbody a.project-link")
         project_names = []
     

@@ -19,14 +19,3 @@ Feature: Login functionality
       | admin    | None     | Incorrect password.           |
       | test12345| test123  | Username or email incorrect.  |
       | None     | 1234     | Username or email incorrect.  |
-
-
-# Scenario Outline: Multiple login tests
-#   When User login with "<username>" and "<password>"
-#   Then Dashboard page is displayed
-  
-#   Examples:
-#     | username | password |
-#     | admin    | 1234     |
-#     | user1    | pass1    |
-#     | test     | test123  |

@@ -11,7 +11,6 @@ def before_all(context):
     """Setup executed before all tests"""
     context.playwright = sync_playwright().start()
     context.browser_type = context.playwright.chromium
-    # You can also use: context.playwright.firefox or context.playwright.webkit
 
 
 def before_scenario(context, scenario):
