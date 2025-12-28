@@ -1,111 +1,70 @@
-# Project Planner - Mini SaaS + QA Automation
+# Project Planner
 
-## 📋 Description
-Project management application with automated testing using Behave (BDD) and Playwright.
+A simple project management app with automated tests.
 
-## 🚀 Setup Instructions
-
-### Prerequisites
-- Python 3.10 or higher
+## What you need
+- Python 3.10+
 - Git
 
-### Installation
+## Getting started
 
-1. **Clone the repository:**
 ```bash
+# Get the code
 git clone <your-repo-url>
 cd "mini SaaS + qa auto skills"
-```
 
-2. **Create virtual environment:**
-```bash
+# Set up Python environment
 cd automation
 python -m venv .venv
-```
 
-3. **Activate virtual environment:**
-
-**Windows (PowerShell):**
-```powershell
+# Activate it (Windows PowerShell)
 .venv\Scripts\Activate.ps1
-```
 
-**Windows (CMD):**
-```cmd
-.venv\Scripts\activate.bat
-```
-
-**Linux/Mac:**
-```bash
-source .venv/bin/activate
-```
-
-4. **Install dependencies:**
-```bash
+# Install stuff
 pip install -r ../requirements.txt
-```
-
-5. **Install Playwright browsers:**
-```bash
 playwright install chromium
 ```
 
-## 🧪 Running Tests
+## Running tests
 
-### Run all tests:
 ```bash
-cd automation
+# All tests
 behave tests\bdd
-```
 
-### Run specific feature:
-```bash
+# Specific feature
 behave tests\bdd\feature_files\login.feature
-```
 
-### Run tests with tags:
-```bash
+# By tag
 behave tests\bdd --tags=@smoke
-behave tests\bdd --tags=@login
-behave tests\bdd --tags=@critical
 ```
 
-## 📁 Project Structure
+## Project layout
+
 ```
-├── project-planner/          # Web application
-│   ├── dashboard.html
-│   ├── login.html
-│   └── assets/
-├── automation/               # Test automation
-│   ├── pom/                 # Page Object Models
-│   ├── tests/
-│   │   └── bdd/
-│   │       ├── feature_files/
-│   │       └── steps/
-│   └── .venv/               # Virtual environment (not in repo)
-└── requirements.txt         # Python dependencies
+project-planner/     - The actual app
+automation/          - Tests go here
+  pom/              - Page objects
+  tests/bdd/        - Feature files and steps
 ```
 
-## 🔧 Development Workflow
+## Working with Git
 
-### Working on multiple machines:
-
-1. **Push changes from current machine:**
+Push your changes:
 ```bash
 git add .
-git commit -m "Your message"
+git commit -m "what you changed"
 git push
 ```
 
-2. **Pull changes on another machine:**
+Pull on another machine:
 ```bash
 git pull
 cd automation
-# Activate .venv if not activated
-pip install -r ../requirements.txt  # Update dependencies if changed
+# activate .venv again
+pip install -r ../requirements.txt
 ```
 
-## 📝 Notes
-- `.venv` is excluded from Git (it's machine-specific)
-- Always activate virtual environment before running tests
-- Screenshots are saved in `automation/tests/bdd/screenshots/`
+## Notes
+- `.venv` is not in git, you make it on each machine
+- Screenshots get saved in `automation/tests/bdd/screenshots/`
+- Always activate the venv before running tests
