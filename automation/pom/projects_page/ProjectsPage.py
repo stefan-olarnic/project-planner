@@ -168,3 +168,46 @@ class ProjectsPage(BasePage):
         is_disabled = create_btn.get_attribute('disabled') is not None or \
                      create_btn.get_attribute('aria-disabled') == 'true'
         return not is_disabled
+    
+    def open_project(self, project_name):
+        """
+        Open a project by clicking its name link
+        
+        Args:
+            project_name: Name of the project to open
+        """
+        project_link = self.page.locator(f"a.project-link:has-text('{project_name}')")
+        assert project_link.is_visible(), f"Project '{project_name}' link not found"
+        project_link.click()
+        
+        # Wait for navigation to project page
+        self.page.wait_for_url("**/project.html*", timeout=5000)
+        self.page.wait_for_timeout(500)
+    
+    def project_exists(self, project_name):
+        """
+        Check if a project exists in the projects list
+        
+        Args:
+            project_name: Name of the project to check
+            
+        Returns:
+            bool: True if project exists, False otherwise
+        """
+        all_projects = self.get_all_project_names()
+        return project_name in all_projects
+    
+    def navigate_to_project(self, project_name):
+        """
+        Navigate to a project - create it if it doesn't exist, then open it
+        
+        Args:
+            project_name: Name of the project to navigate to
+        """
+        if not self.project_exists(project_name):
+            print(f"Project '{project_name}' not found. Creating it...")
+            self.create_project(project_name)
+        
+        print(f"Opening project '{project_name}'...")
+        self.open_project(project_name)
+    
