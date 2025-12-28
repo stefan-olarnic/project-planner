@@ -1,10 +1,6 @@
 # Project Planner
 
-A simple project management app with automated tests.
-
-## What you need
-- Python 3.10+
-- Git
+A simple project management app with automated scripts.
 
 ## Getting started
 
@@ -17,10 +13,10 @@ cd "mini SaaS + qa auto skills"
 cd automation
 python -m venv .venv
 
-# Activate it (Windows PowerShell)
-.venv\Scripts\Activate.ps1
+# Activate it
+.venv\Scripts\activate
 
-# Install stuff
+# Install requirements and playwright chromium
 pip install -r ../requirements.txt
 playwright install chromium
 ```
@@ -42,29 +38,10 @@ behave tests\bdd --tags=@smoke
 
 ```
 project-planner/     - The actual app
-automation/          - Tests go here
+automation/          - Automated scripts
   pom/              - Page objects
   tests/bdd/        - Feature files and steps
 ```
 
-## Working with Git
-
-Push your changes:
-```bash
-git add .
-git commit -m "what you changed"
-git push
-```
-
-Pull on another machine:
-```bash
-git pull
-cd automation
-# activate .venv again
-pip install -r ../requirements.txt
-```
-
 ## Notes
-- `.venv` is not in git, you make it on each machine
 - Screenshots get saved in `automation/tests/bdd/screenshots/`
-- Always activate the venv before running tests
